@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voidsent SMP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://i.imgur.com/80z0FzZ_d.webp?maxwidth=760&fidelity=grand">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 80vh;
+            margin-bottom: 75px;
+        }
+      
+        header {
+            background-color: #242424;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header img {
+            max-width: 80px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        header h1 {
+            margin: 10px 0 0;
+            font-size: 2.5rem;
+        }
+
+        nav {
+            background-color: #2a2a2a;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            position: relative;
+            margin: 0 15px;
+        }
+
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 10px;
+            display: block;
+            transition: transform 0s ease-in-out;
+        }
+
+        nav a:hover {
+            color: #dc03eb;
+            transform: scale(1.075);
+            text-shadow: 0 0 1px #dc03eb, 0 0 2px #dc03eb;
+        }
+
+        nav li:hover .dropdown,
+        .dropdown:hover {
+            display: block;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #242424;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            z-index: 10;
+            min-width: 150px;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 10px 15px;
+            white-space: nowrap;
+        }
+
+        .dropdown a:hover {
+            color: #dc03eb;
+            transform: scale(1.075);
+            text-shadow: 0 0 1px #dc03eb, 0 0 2px #dc03eb;
+        }
+
+        .dropdown-btn:hover {
+            color: #dc03eb;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #2a2a2a;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #242424;
+            position: fixed;
+            left: 0;
+            width: 100%;
+            bottom: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+      
+        footer img {
+            max-width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+      
+        button {
+            background-color: #dc03eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        button:hover {
+            background-color: #a302bd;
+        }
+
+        #support-buttons {
+            text-align: center;
+            padding: 20px;
+        }
+      
+        .discord-invite {
+            width: 30px;
+            height: auto;
+        }
+      
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: #242424;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            cursor: pointer;
+            padding: 5px;
+            background-color: #242424;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #242424;
+            margin-top: 5px;
+        }
+
+        .faq-item:hover .faq-answer {
+            display: block;
+        }
+      
+        .faq-content {
+            display: none;
+            width: 800px;
+        }
+
+        .faq-content.active {
+            display: block;
+        }
+      
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://i.imgur.com/80z0FzZ_d.webp?maxwidth=760&fidelity=grand" alt="Voidsent SMP Logo">
+        <h1>Voidsent SMP</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#rules">Rules</a></li>
+            <li><a href="#current-staff">Current Staff</a></li>
+            <li><a href="#updates">Updates</a></li>
+            <li>
+                <a class="dropdown-btn">Applications</a>
+                <div class="dropdown">
+                    <a href="#mod-application">Mod</a>
+                    <a href="#builder-application">Builder</a>
+                </div>
+            </li>
+            <li><a href="#support">Voting</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div id="home" class="tab-content active">
+            <h2>Welcome to Voidsent SMP!</h2>
+            <p>Join us on Voidsent, a survival Minecraft server where you can explore, build, and survive together. Hop in at play.voidsent.net to start your adventure!</p>
+        </div>
+
+        <div id="features" class="tab-content">
+            <h2>Server Features</h2>
+            <p>Our server offers a balanced survival experience with land claims, custom enchants, and items, allowing you to protect your builds and explore vast collections of items with a simple yet effective plugin. We have a custom economy system, player shops, and a variety of biomes to explore. Plus, our active staff ensures smooth gameplay with regular updates and events to keep things engaging!</p>
+        </div>
+
+        <div id="rules" class="tab-content">
+            <h2>Rules</h2>
+            <p>1. No hacking of any kind.</p>
+            <p>2. No doxing or leaking other players' information.</p>
+            <p>3. No excessive use of derogatory language.</p>
+            <p>4. No griefing or stealing. (except in factions)</p>
+            <p>5. No duplication machines.</p>
+            <p>6. No spamming in chat or using inappropriate language.</p>
+            <p>7. No border claiming or destroying areas near other players' claims.</p>
+            <p>8. Respect all players and staff members.</p>
+            <p>9. Glitches should be reported, not abused.</p>
+            <p>10. No lag machines or anything that can ruin the general server experience for our players.</p>
+            <p>11. Staff have the final say.</p>
+            <p>12. Use common sense.</p>
+        </div>
+      
+        <div id="current-staff" class="tab-content">
+            <h2>Current Staff</h2>
+            <p>Owner: FoodTruckDonkey</p>
+            <p>Head Admin: NumbSkelly</p>
+            <p>Admin: SBC_Retro</p>
+            <p>Head Builder: Restonify</p>
+            <p>Builder: ndirmn</p>
+            <p>Website Developer: ndirmn</p>
+            <p>Head Mod: Grendino</p>
+            <p>Mod: dvddb3</p>
+            <p>Mod: KyuXsz</p>
+            <p>Mod: TheRealGarriJoul</p>
+            <p>Mod: SBC_TIME</p>
+            <p>Mod: TengoSwag</p>
+        </div>
+      
+        <div id="updates" class="tab-content">
+            <h2>Updates</h2>
+            <p>2/16/2025 - To celebrate the opening of factions, everyone who is online in factions between 2/15 and 2/17 will receive a one-of-a-kind sword!</p>
+            <p>2/15/2025 - Factions is up! Join us in raiding bases and fighting players!</p>
+            <p>1/7/2025 - There was a misconfiguration with a plugin resulting in unintended buffs to some mobs. The plugin has been removed and the issue should be fully resolved.</p>
+            <p>1/5/2025 - Sculk Armor and Heartstealers are being removed due to power creep, please turn any copies of the items to admins within one week or be punished, sorry for any inconveniences this may cause, players may be given compensation for their loss.</p>
+        </div>
+
+        <div id="mod-application" class="tab-content">
+            <h2>Apply for Moderator</h2>
+            <h3>Requirements:</h3>
+            <p>1. At least 50 hours played on the server.</p>
+            <p>2. Active and mature, with a clear understanding of the server rules.</p>
+            <p>3. Must be willing to help players and enforce server rules in a fair and consistent manner.</p>
+            <p>4. Previous moderation experience is a plus.</p>
+            <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLScCuWbjuPStYImUrAlivViaVEY4fZjBEXE7Rha1-XPPEVac1g/viewform?usp=sharing', '_blank')">Apply</button>
+      </div>
+
+        <div id="builder-application" class="tab-content">
+            <h2>Apply for Builder</h2>
+            <h3>Requirements:</h3>
+            <p>1. Must have experience building in Minecraft (screenshots or portfolio required).</p>
+            <p>2. Ability to create aesthetically pleasing and functional builds.</p>
+            <p>3. Willingness to collaborate with other builders and staff.</p>
+            <p>4. Must be active and communicate well with the team.</p>
+            <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeZOHkwtJ4xPEVOhlnMRW8G4VxdRqe2OpGVXLMRnJwlS_6Tbw/viewform?usp=sharing', '_blank')">Apply</button>
+        </div>
+      
+        <div id="support" class="tab-content">
+            <h2>Voting</h2>
+            <div id="voting-buttons">
+                <button onclick="window.open('https://minecraft-server-list.com/server/508083/vote/', '_blank')">Minecraft Server List</button>
+                <button onclick="window.open('https://www.planetminecraft.com/server/voidsent-smp-updated-to-1-21/vote/', '_blank')">Planet Minecraft</button>
+                <button onclick="window.open('https://minecraft-mp.com/server/337558/vote/', '_blank')">Minecraft Multiplayer</button>
+                <button onclick="window.open('https://minecraftservers.org/vote/667835', '_blank')">MinecraftServers.org</button>
+                <button onclick="window.open('https://best-minecraft-servers.co/server-voidsent-smp.26079/vote', '_blank')">Best Minecraft Servers</button>
+                <button onclick="window.open('https://topminecraftservers.org/vote/39313', '_blank')">Top Minecraft Servers</button>
+                <button onclick="window.open('https://gamemonitoring.net/minecraft/servers/6455453/vote', '_blank')">GAMEMONITORING</button>
+            </div>
+        </div>
+      
+        <div id="faq" class="faq-content">
+          <h2>FAQ</h2>
+            <div class="faq-container">
+              <div class="faq-item">
+                <div class="faq-question">What is the server IP address?</div>
+                <div class="faq-answer">The server's IP address is play.voidsent.net</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">What Minecraft version is the server running on?</div>
+                <div class="faq-answer">The server is on 1.21.1+</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">How do I protect my builds from griefing?</div>
+                <div class="faq-answer">You can claim land to protect your builds from other players</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">Is the survival world vanilla or does it have custom features?</div>
+                <div class="faq-answer">The server has custom enchants and items along with many other plugins</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">Do you have an economy or trading system in the survival world?</div>
+                <div class="faq-answer">Yes, we have different trading systems, some run by plugins, some run by players</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">How can I earn money or resources in survival mode?</div>
+                <div class="faq-answer">You can earn money by selling items and you can collect resources by buying from the shop</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">How do I report issues or rule-breaking players?</div>
+                <div class="faq-answer">Report players to our staff in the discord server</div>
+              </div>
+          </div>
+        </div>
+      
+    </main>
+
+    <footer>
+      <a href="https://discord.voidsent.net/" target="_blank">
+        <img src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png" alt="" class="discord-invite" />
+      </a>
+      <p>&copy; 2025 Voidsent SMP. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                const targetId = link.getAttribute('href')?.substring(1);
+                if (!targetId) return;
+                document.querySelectorAll('.tab-content, .faq-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
